@@ -1,0 +1,16 @@
+---
+import { getLangFromUrl, useTranslations } from "../i18n/ui";
+import LanguagePicker from "./LanguagePicker.astro";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const homeUrl = lang === "ca" ? "/" : `/${lang}`;
+---
+
+<header>
+  <a href={homeUrl} class="logo">
+    <img src="/favicon.svg" alt="Plans per Barcelona" width="32" height="32" />
+    {t("nav.title")}
+  </a>
+  <LanguagePicker />
+</header>

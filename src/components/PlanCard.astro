@@ -1,0 +1,33 @@
+---
+import type { Plan } from '../data/plans';
+import { useTranslations, defaultLang } from '../i18n/ui';
+import type { ui } from '../i18n/ui';
+
+interface Props {
+  plan: Plan;
+  lang: keyof typeof ui;
+}
+
+const { plan, lang } = Astro.props;
+const t = useTranslations(lang);
+
+const title = plan.title[lang] ?? plan.title[defaultLang];
+const desc = plan.description[lang] ?? plan.description[defaultLang];
+---
+
+<article class="plan-card">
+  <span class="plan-date">{plan.date}</span>
+  <h2 class="plan-title">{title}</h2>
+  <div class="plan-location">{plan.location}</div>
+
+  <p class="plan-desc">{desc}</p>
+
+  <div class="plan-footer">
+    <div class="plan-meta-item">
+      <span>{t('plan.author')}</span>&nbsp;<strong>@{plan.author}</strong>
+    </div>
+    <div class="plan-meta-item">
+      <span>▲</span>&nbsp;<span>{plan.upvotes}</span>&nbsp;{t('plan.upvotes')}
+    </div>
+  </div>
+</article>

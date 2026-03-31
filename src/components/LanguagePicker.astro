@@ -1,0 +1,24 @@
+---
+import { getLangFromUrl, languages } from "../i18n/ui";
+
+const lang = getLangFromUrl(Astro.url);
+const currentPath = Astro.url.pathname
+  .replace(`/${lang}`, "")
+  .replace(/^\//, "");
+---
+
+<div class="lang-picker">
+  {
+    Object.entries(languages).map(([locale, label]) => {
+      const prefix = locale === "ca" ? "/" : `/${locale}/`;
+      let href = `${prefix}${currentPath}`;
+      href = href.endsWith("/") && href.length > 1 ? href.slice(0, -1) : href;
+
+      return (
+        <a href={href} class={`lang-link ${lang === locale ? "active" : ""}`}>
+          {locale}
+        </a>
+      );
+    })
+  }
+</div>
