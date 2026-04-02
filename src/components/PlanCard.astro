@@ -18,6 +18,9 @@ const desc = plan.description[lang] ?? plan.description[defaultLang];
 <article class="plan-card">
   <span class="plan-date">{plan.date}</span>
   <h2 class="plan-title">{title}</h2>
+  <!-- <h2 class="plan-title">
+    <a href={plan.url} target="_blank" rel="noopener noreferrer">{title}</a>
+  </h2> -->
   <div class="plan-location">{plan.location}</div>
 
   <p class="plan-desc">{desc}</p>
@@ -25,6 +28,7 @@ const desc = plan.description[lang] ?? plan.description[defaultLang];
   <div class="plan-footer">
     <div class="plan-meta-item">
       <span>{t('plan.author')}</span>&nbsp;<strong>@{plan.author}</strong>
+      <!-- <span>{t('plan.source')}</span>&nbsp;<a href={plan.url} target="_blank" rel="noopener noreferrer">{plan.source}</a> -->
     </div>
     <div class="plan-meta-item">
       <span>▲</span>&nbsp;<span>{plan.upvotes}</span>&nbsp;{t('plan.upvotes')}

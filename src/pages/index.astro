@@ -1,18 +1,23 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import PlanCard from '../components/PlanCard.astro';
-import { mockPlans } from '../data/plans';
+import { getPlans } from '../lib/db';
 import { useTranslations } from '../i18n/ui';
 
 const lang = 'ca';
 const t = useTranslations(lang);
+const plans = await getPlans();
 ---
 
 <Layout title="Plans per Barcelona">
   <h1 class="page-title">{t('home.title')}</h1>
   <p class="page-subtitle">{t('home.subtitle')}</p>
 
-  {mockPlans.map((plan) => (
+  {plans.length === 0 && (
+    <p class="page-empty">{t('home.empty')}</p>
+  )}
+
+  {plans.map((plan) => (
     <PlanCard plan={plan} lang={lang} />
   ))}
 </Layout>
